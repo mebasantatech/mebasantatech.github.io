@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-en="Portfolio | Electronics & Communication Engineer" data-jp="ポートフォリオ | 電子通信エンジニア">Portfolio | Electronics & Communication Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slate: {
+              950: '#0D1117',
+              900: '#0F172A',
+              800: '#1E293B',
+              700: '#334155',
+              600: '#475569',
+              400: '#94A3B8',
+              300: '#CBD5E1',
+              200: '#E2E8F0',
+            },
+            indigo: {
+              500: '#6366F1',
+              400: '#818CF8',
+              300: '#A5B4FC',
+            },
+            sky: {
+              400: '#38BDF8',
+              300: '#7DD3FC',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.6s ease forwards',
+            'slide-up': 'slideUp 0.7s ease forwards',
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'trace': 'trace 2s ease forwards',
+          },
+          keyframes: {
+            fadeIn: { from: { opacity: 0 }, to: { opacity: 1 } },
+            slideUp: { from: { opacity: 0, transform: 'translateY(30px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+            glowPulse: { '0%,100%': { opacity: 0.4 }, '50%': { opacity: 0.9 } },
+            trace: { from: { strokeDashoffset: '400' }, to: { strokeDashoffset: '0' } },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { background-color: #0D1117; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0D1117;
+      color: #E2E8F0;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6, .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(30, 41, 59, 0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(99, 102, 241, 0.15);
+    }
+    .glass-nav {
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(99, 102, 241, 0.12);
+    }
+
+    /* Glow effects */
+    .glow-indigo {
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.25), 0 0 60px rgba(99, 102, 241, 0.1);
+    }
+    .glow-sky {
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2), 0 0 50px rgba(56, 189, 248, 0.08);
+    }
+    .text-glow-indigo {
+      text-shadow: 0 0 30px rgba(99, 102, 241, 0.6);
+    }
+    .text-glow-sky {
+      text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    }
+
+    /* Language toggle fade */
+    .lang-fade {
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .lang-fade.fading {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    /* PCB trace decoration */
+    .pcb-trace {
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+    }
+    .pcb-trace.animated {
+      animation: trace 2s ease forwards;
+    }
+
+    /* Timeline */
+    .timeline-line {
+      position: absolute;
+      left: 16px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #6366F1, #38BDF8, rgba(99,102,241,0.1));
+    }
+    .timeline-dot {
+      width: 14px;
+      height: 14px;
+      background: #6366F1;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(99,102,241,0.8), 0 0 24px rgba(99,102,241,0.4);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    /* Skill chip */
+    .skill-chip {
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.25);
+      transition: all 0.2s ease;
+    }
+    .skill-chip:hover {
+      background: rgba(99,102,241,0.22);
+      border-color: rgba(99,102,241,0.5);
+      box-shadow: 0 0 10px rgba(99,102,241,0.2);
+      transform: translateY(-1px);
+    }
+
+    /* Project card */
+    .project-card {
+      background: rgba(30,41,59,0.6);
+      border: 1px solid rgba(99,102,241,0.12);
+      transition: all 0.3s ease;
+    }
+    .project-card:hover {
+      border-color: rgba(99,102,241,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(99,102,241,0.15);
+    }
+
+    /* Tag chip */
+    .tag-chip {
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.2);
+      color: #7DD3FC;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Nav link */
+    .nav-link {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #6366F1;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #A5B4FC; }
+
+    /* Section reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CTA button */
+    .btn-primary {
+      background: linear-gradient(135deg, #6366F1, #818CF8);
+      border: 1px solid rgba(129,140,248,0.4);
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+    }
+
+    /* Lang toggle button */
+    .lang-toggle {
+      border: 1px solid rgba(99,102,241,0.35);
+      background: rgba(99,102,241,0.08);
+      transition: all 0.25s ease;
+    }
+    .lang-toggle:hover {
+      background: rgba(99,102,241,0.2);
+      border-color: rgba(99,102,241,0.6);
+    }
+
+    /* Hero gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #818CF8 0%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      transition: max-height 0.35s ease, opacity 0.35s ease;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+    #mobile-menu.open {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0D1117; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #6366F1; }
+
+    /* Grid background pattern */
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Responsive JP text sizing */
+    [lang="jp"] .text-6xl { font-size: clamp(2rem, 5vw, 3.5rem); }
+    .jp-compact { line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+<!-- ======================== NAV ======================== -->
+<nav id="navbar" class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-md glow-indigo flex items-center justify-center" style="background: linear-gradient(135deg,#6366F1,#38BDF8);">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="9" r="3" fill="white"/>
+            <path d="M9 1v4M9 13v4M1 9h4M13 9h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="font-display font-semibold text-slate-200 text-sm tracking-wide">ECE Portfolio</span>
+      </div>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden md:flex items-center gap-7">
+        <a href="#summary" class="nav-link text-slate-400 text-sm font-medium">
+          <span data-en="Summary" data-jp="概要">Summary</span>
+        </a>
+        <a href="#skills" class="nav-link text-slate-400 text-sm font-medium">
+          <span data-en="Skills" data-jp="スキル">Skills</span>
+        </a>
+        <a href="#experience" class="nav-link text-slate-400 text-sm font-medium">
+          <span data-en="Experience" data-jp="経験">Experience</span>
+        </a>
+        <a href="#projects" class="nav-link text-slate-400 text-sm font-medium">
+          <span data-en="Projects" data-jp="プロジェクト">Projects</span>
+        </a>
+        <a href="#education" class="nav-link text-slate-400 text-sm font-medium">
+          <span data-en="Education" data-jp="学歴">Education</span>
+        </a>
+        <a href="#contact" class="nav-link text-slate-400 text-sm font-medium">
+          <span data-en="Contact" data-jp="連絡先">Contact</span>
+        </a>
+      </div>
+
+      <!-- Lang Toggle + Mobile Menu -->
+      <div class="flex items-center gap-3">
+        <button id="lang-toggle-btn" onclick="toggleLanguage()" class="lang-toggle rounded-full px-4 py-1.5 text-xs font-mono font-medium text-indigo-300 cursor-pointer select-none">
+          EN / JP
+        </button>
+        <!-- Mobile hamburger -->
+        <button id="mobile-menu-btn" class="md:hidden text-slate-400 hover:text-slate-200 transition-colors p-1" onclick="toggleMobileMenu()">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path id="burger-icon" d="M3 6h16M3 11h16M3 16h16"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden glass-nav border-t border-slate-800">
+      <div class="px-2 pt-2 pb-4 space-y-1">
+        <a href="#summary" class="block px-3 py-2 text-slate-400 text-sm hover:text-indigo-300 transition-colors" onclick="toggleMobileMenu()"><span data-en="Summary" data-jp="概要">Summary</span></a>
+        <a href="#skills" class="block px-3 py-2 text-slate-400 text-sm hover:text-indigo-300 transition-colors" onclick="toggleMobileMenu()"><span data-en="Skills" data-jp="スキル">Skills</span></a>
+        <a href="#experience" class="block px-3 py-2 text-slate-400 text-sm hover:text-indigo-300 transition-colors" onclick="toggleMobileMenu()"><span data-en="Experience" data-jp="経験">Experience</span></a>
+        <a href="#projects" class="block px-3 py-2 text-slate-400 text-sm hover:text-indigo-300 transition-colors" onclick="toggleMobileMenu()"><span data-en="Projects" data-jp="プロジェクト">Projects</span></a>
+        <a href="#education" class="block px-3 py-2 text-slate-400 text-sm hover:text-indigo-300 transition-colors" onclick="toggleMobileMenu()"><span data-en="Education" data-jp="学歴">Education</span></a>
+        <a href="#contact" class="block px-3 py-2 text-slate-400 text-sm hover:text-indigo-300 transition-colors" onclick="toggleMobileMenu()"><span data-en="Contact" data-jp="連絡先">Contact</span></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================== HERO ======================== -->
+<section id="hero" class="hero-grid relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+
+  <!-- Ambient glow blobs -->
+  <div class="absolute top-1/4 left-1/4 w-80 h-80 rounded-full" style="background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%); filter: blur(40px);"></div>
+  <div class="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full" style="background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%); filter: blur(40px);"></div>
+
+  <!-- PCB trace decoration (top left) -->
+  <svg class="absolute top-20 left-0 opacity-20 hidden lg:block" width="200" height="200" viewBox="0 0 200 200" fill="none">
+    <path class="pcb-trace" d="M10 100 H60 V40 H140 V80 H180" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="60" cy="40" r="4" fill="#6366F1" opacity="0.6"/>
+    <circle cx="140" cy="80" r="4" fill="#38BDF8" opacity="0.6"/>
+    <path d="M180 80 H160 V120 H200" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+  </svg>
+  <!-- PCB trace decoration (bottom right) -->
+  <svg class="absolute bottom-16 right-0 opacity-15 hidden lg:block" width="180" height="150" viewBox="0 0 180 150" fill="none">
+    <path d="M180 30 H120 V90 H60 V130 H10" stroke="#6366F1" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="120" cy="90" r="4" fill="#38BDF8" opacity="0.7"/>
+    <circle cx="60" cy="90" r="3" fill="#6366F1" opacity="0.5"/>
+  </svg>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+    <!-- Eyebrow -->
+    <div class="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full glass border border-indigo-500/20">
+      <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+      <span class="text-indigo-300 text-xs font-mono tracking-widest uppercase"
+            data-en="Open to Opportunities" data-jp="機会を探しています">Open to Opportunities</span>
+    </div>
+
+    <!-- Name -->
+    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-700 text-slate-100 mb-4 leading-tight">
+      <span data-en="Your Name" data-jp="あなたの名前">Your Name</span>
+    </h1>
+
+    <!-- Title -->
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <div class="h-px w-12 bg-gradient-to-r from-transparent to-indigo-500"></div>
+      <h2 class="gradient-text font-display text-xl sm:text-2xl font-500 tracking-wide"
+          data-en="Electronics & Communication Engineer"
+          data-jp="電子通信エンジニア">Electronics & Communication Engineer</h2>
+      <div class="h-px w-12 bg-gradient-to-l from-transparent to-indigo-500"></div>
+    </div>
+
+    <!-- Hook -->
+    <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+       data-en="Component-level hardware troubleshooter · AI data operations specialist · Bilingual in Japanese corporate environments"
+       data-jp="コンポーネントレベルのハードウェアトラブルシューター · AIデータ運用スペシャリスト · 日本語ビジネス環境対応">
+      Component-level hardware troubleshooter · AI data operations specialist · Bilingual in Japanese corporate environments
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#projects" class="btn-primary rounded-full px-8 py-3 text-sm font-semibold text-white font-display tracking-wide">
+        <span data-en="View My Work" data-jp="実績を見る">View My Work</span>
+      </a>
+      <a href="#contact" class="rounded-full px-8 py-3 text-sm font-medium text-slate-300 border border-slate-700 hover:border-indigo-500/40 hover:text-indigo-300 transition-all duration-300">
+        <span data-en="Get in Touch" data-jp="お問い合わせ">Get in Touch</span>
+      </a>
+    </div>
+
+    <!-- Stat chips -->
+    <div class="flex flex-wrap items-center justify-center gap-4 mt-14">
+      <div class="glass rounded-lg px-5 py-3 text-center">
+        <div class="text-2xl font-display font-700 text-indigo-400 text-glow-indigo">4+</div>
+        <div class="text-xs text-slate-500 mt-0.5" data-en="Years AI Annotation" data-jp="AIアノテーション歴">Years AI Annotation</div>
+      </div>
+      <div class="glass rounded-lg px-5 py-3 text-center">
+        <div class="text-2xl font-display font-700 text-sky-400 text-glow-sky">N4</div>
+        <div class="text-xs text-slate-500 mt-0.5" data-en="JLPT Japanese" data-jp="日本語能力">JLPT Japanese</div>
+      </div>
+      <div class="glass rounded-lg px-5 py-3 text-center">
+        <div class="text-2xl font-display font-700 text-indigo-400 text-glow-indigo">B.E.</div>
+        <div class="text-xs text-slate-500 mt-0.5" data-en="ECE Degree (1st Div.)" data-jp="電子通信工学士（首席）">ECE Degree (1st Div.)</div>
+      </div>
+      <div class="glass rounded-lg px-5 py-3 text-center">
+        <div class="text-2xl font-display font-700 text-sky-400 text-glow-sky">🇯🇵</div>
+        <div class="text-xs text-slate-500 mt-0.5" data-en="Based in Japan" data-jp="日本在住">Based in Japan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+    <span class="text-xs font-mono text-slate-500 tracking-widest uppercase">scroll</span>
+    <div class="w-px h-8 bg-gradient-to-b from-slate-500 to-transparent"></div>
+  </div>
+</section>
+
+<!-- ======================== SUMMARY ======================== -->
+<section id="summary" class="py-24 px-4 sm:px-6">
+  <div class="max-w-4xl mx-auto reveal">
+
+    <div class="flex items-center gap-4 mb-10">
+      <div class="text-xs font-mono text-indigo-400 tracking-widest uppercase">01</div>
+      <div class="h-px flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></div>
+      <h2 class="font-display text-2xl sm:text-3xl font-600 text-slate-100"
+          data-en="Professional Summary" data-jp="プロフィール">Professional Summary</h2>
+      <div class="h-px flex-1 bg-gradient-to-l from-indigo-500/50 to-transparent"></div>
+    </div>
+
+    <div class="glass rounded-2xl p-8 sm:p-10 relative overflow-hidden">
+      <!-- Corner accent -->
+      <div class="absolute top-0 right-0 w-32 h-32 opacity-10" style="background: radial-gradient(circle at top right, #6366F1, transparent 70%)"></div>
+
+      <p class="text-slate-300 text-base sm:text-lg leading-relaxed jp-compact"
+         data-en="Detail-oriented Electronics and Communication Engineer with hands-on international experience in Japan specializing in component-level hardware troubleshooting and maintenance for heavy industrial boring and trenchless (iron mole) machinery. Combines solid foundational knowledge in embedded systems and networking with 4 years of remote experience in AI data annotation for computer vision models. Bilingual professional capable of navigating Japanese corporate environments while utilizing English for technical documentation."
+         data-jp="トリブバン大学にて電子通信工学の学士号を取得後、4年間のリモートでのAIデータアノテーション業務を経て来日。現在はボーリング・非開削（アイアンモール）工事会社にて、産業用機械における電子制御装置や基板、アンプボックスの回路図読解、故障診断、はんだ付けによるICチップ交換といったメンテナンス業務に従事。日本語での円滑な業務連絡と英語による技術仕様書の読解を両立するエンジニア。">
+        Detail-oriented Electronics and Communication Engineer with hands-on international experience in Japan specializing in component-level hardware troubleshooting and maintenance for heavy industrial boring and trenchless (iron mole) machinery. Combines solid foundational knowledge in embedded systems and networking with 4 years of remote experience in AI data annotation for computer vision models. Bilingual professional capable of navigating Japanese corporate environments while utilizing English for technical documentation.
+      </p>
+
+      <!-- Key traits -->
+      <div class="flex flex-wrap gap-3 mt-8">
+        <span class="skill-chip rounded-full px-4 py-1.5 text-sm text-indigo-300"
+              data-en="🔧 Hardware Diagnostics" data-jp="🔧 ハードウェア診断">🔧 Hardware Diagnostics</span>
+        <span class="skill-chip rounded-full px-4 py-1.5 text-sm text-indigo-300"
+              data-en="🤖 AI Data Operations" data-jp="🤖 AIデータ運用">🤖 AI Data Operations</span>
+        <span class="skill-chip rounded-full px-4 py-1.5 text-sm text-indigo-300"
+              data-en="🌐 Bilingual JP/EN" data-jp="🌐 日英バイリンガル">🌐 Bilingual JP/EN</span>
+        <span class="skill-chip rounded-full px-4 py-1.5 text-sm text-indigo-300"
+              data-en="⚡ Embedded Systems" data-jp="⚡ 組み込みシステム">⚡ Embedded Systems</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== SKILLS ======================== -->
+<section id="skills" class="py-24 px-4 sm:px-6">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="flex items-center gap-4 mb-10">
+      <div class="text-xs font-mono text-sky-400 tracking-widest uppercase">02</div>
+      <div class="h-px flex-1 bg-gradient-to-r from-sky-500/50 to-transparent"></div>
+      <h2 class="font-display text-2xl sm:text-3xl font-600 text-slate-100"
+          data-en="Technical Skills" data-jp="技術スキル">Technical Skills</h2>
+      <div class="h-px flex-1 bg-gradient-to-l from-sky-500/50 to-transparent"></div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Hardware -->
+      <div class="glass rounded-xl p-6 hover:border-indigo-500/30 transition-all duration-300 group">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(99,102,241,0.15)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2">
+              <rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 3v4M16 3v4M3 12h18"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-600 text-slate-200 text-sm"
+              data-en="Hardware Maintenance" data-jp="ハードウェアメンテナンス">Hardware Maintenance</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="IC Replacement" data-jp="IC交換">IC Replacement</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="PCB Diagnostics" data-jp="PCB診断">PCB Diagnostics</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Precision Soldering" data-jp="精密はんだ付け">Precision Soldering</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Circuit Schematics" data-jp="回路図解析">Circuit Schematics</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Multimeter Testing" data-jp="マルチメーター測定">Multimeter Testing</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Ampere Boxes" data-jp="アンプボックス">Ampere Boxes</span>
+        </div>
+      </div>
+
+      <!-- Embedded & Robotics -->
+      <div class="glass rounded-xl p-6 hover:border-indigo-500/30 transition-all duration-300">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(56,189,248,0.12)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-600 text-slate-200 text-sm"
+              data-en="Embedded & Robotics" data-jp="組み込み・ロボティクス">Embedded & Robotics</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300">Arduino</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300">Raspberry Pi</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300">C / C++</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Sensor Integration" data-jp="センサー統合">Sensor Integration</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Motor Control" data-jp="モーター制御">Motor Control</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Line Following" data-jp="ライントレース">Line Following</span>
+        </div>
+      </div>
+
+      <!-- Software & AI -->
+      <div class="glass rounded-xl p-6 hover:border-indigo-500/30 transition-all duration-300">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(99,102,241,0.15)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A5B4FC" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-600 text-slate-200 text-sm"
+              data-en="Software & AI Tools" data-jp="ソフトウェア・AIツール">Software & AI Tools</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300">Python</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300">OpenCV</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300">Tesseract OCR</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Bounding Box Annotation" data-jp="バウンディングボックス">Bounding Box Annotation</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Computer Vision" data-jp="コンピュータビジョン">Computer Vision</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Image Labeling" data-jp="画像ラベリング">Image Labeling</span>
+        </div>
+      </div>
+
+      <!-- Networking -->
+      <div class="glass rounded-xl p-6 hover:border-sky-500/30 transition-all duration-300">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(56,189,248,0.12)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2">
+              <rect x="9" y="2" width="6" height="4" rx="1"/><rect x="2" y="9" width="6" height="4" rx="1"/><rect x="16" y="9" width="6" height="4" rx="1"/><rect x="9" y="18" width="6" height="4" rx="1"/>
+              <path d="M12 6v3M5 11h4M15 11h4M12 16v-3"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-600 text-slate-200 text-sm"
+              data-en="Networking" data-jp="ネットワーク">Networking</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="CCNA Training" data-jp="CCNA研修">CCNA Training</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Routing & Switching" data-jp="ルーティング・スイッチング">Routing & Switching</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="Subnetting" data-jp="サブネッティング">Subnetting</span>
+          <span class="skill-chip rounded px-2.5 py-1 text-xs text-slate-300" data-en="TCP/IP Stack" data-jp="TCP/IPスタック">TCP/IP Stack</span>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="glass rounded-xl p-6 hover:border-indigo-500/30 transition-all duration-300 sm:col-span-2 lg:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: rgba(99,102,241,0.15)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2">
+              <path d="M5 8l4 4-4 4M11 12h8"/><circle cx="12" cy="12" r="9"/>
+            </svg>
+          </div>
+          <h3 class="font-display font-600 text-slate-200 text-sm"
+              data-en="Languages" data-jp="言語能力">Languages</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🇬🇧</span>
+            <div>
+              <div class="text-sm text-slate-200 font-medium" data-en="English" data-jp="英語">English</div>
+              <div class="text-xs text-indigo-300" data-en="Fluent (Technical)" data-jp="流暢（技術文書）">Fluent (Technical)</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🇯🇵</span>
+            <div>
+              <div class="text-sm text-slate-200 font-medium" data-en="Japanese" data-jp="日本語">Japanese</div>
+              <div class="text-xs text-sky-300" data-en="Conversational (N4/Business)" data-jp="ビジネス会話（N4）">Conversational (N4/Business)</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xl">🇳🇵</span>
+            <div>
+              <div class="text-sm text-slate-200 font-medium" data-en="Nepali" data-jp="ネパール語">Nepali</div>
+              <div class="text-xs text-slate-400" data-en="Native" data-jp="母国語">Native</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================== EXPERIENCE ======================== -->
+<section id="experience" class="py-24 px-4 sm:px-6">
+  <div class="max-w-4xl mx-auto reveal">
+
+    <div class="flex items-center gap-4 mb-12">
+      <div class="text-xs font-mono text-indigo-400 tracking-widest uppercase">03</div>
+      <div class="h-px flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></div>
+      <h2 class="font-display text-2xl sm:text-3xl font-600 text-slate-100"
+          data-en="Experience" data-jp="職歴">Experience</h2>
+      <div class="h-px flex-1 bg-gradient-to-l from-indigo-500/50 to-transparent"></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative pl-10">
+      <div class="timeline-line"></div>
+
+      <!-- Job 1 -->
+      <div class="mb-12 relative">
+        <div class="absolute left-[-26px] top-1 timeline-dot"></div>
+        <div class="glass rounded-xl p-6 sm:p-7 hover:border-indigo-500/25 transition-all duration-300">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+            <div>
+              <h3 class="font-display font-600 text-slate-100 text-base"
+                  data-en="Electronics Maintenance Technician" data-jp="電子メンテナンス技術者">Electronics Maintenance Technician</h3>
+              <div class="text-indigo-300 text-sm mt-1"
+                   data-en="Boring & Iron-Mole Construction Company · Japan" data-jp="ボーリング・非開削（アイアンモール）工事会社（日本）">Boring & Iron-Mole Construction Company · Japan</div>
+            </div>
+            <span class="tag-chip rounded-full px-3 py-1 text-xs whitespace-nowrap self-start sm:self-auto"
+                  data-en="Oct 2024 – Present" data-jp="2024年10月 ～ 現在">Oct 2024 – Present</span>
+          </div>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Diagnose, repair, and maintain sophisticated electronic controllers, motherboards, and remote control units for industrial sewage boring and trenchless (iron mole) tunneling machinery."
+                    data-jp="下水道推進工事およびボーリング工事に使用される重機の電子制御システム、基板、リモートコントローラーの保守・修理。">
+                Diagnose, repair, and maintain sophisticated electronic controllers, motherboards, and remote control units for industrial sewage boring and trenchless (iron mole) tunneling machinery.
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Perform advanced component-level defect finding using multimeters and isolate hardware faults by analyzing complex circuit schematics."
+                    data-jp="配線図および回路図を読み解き、マルチメーター等の測定器を用いてコンポーネントレベルのトラブルシューティングを実施。">
+                Perform advanced component-level defect finding using multimeters and isolate hardware faults by analyzing complex circuit schematics.
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Execute precision soldering and desoldering to replace micro-components, faulty integrated circuits (ICs), and ampere boxes."
+                    data-jp="精密はんだ付け技術を用いた、不良ICチップ、アンプボックス、その他基板部品の交換および修繕。">
+                Execute precision soldering and desoldering to replace micro-components, faulty integrated circuits (ICs), and ampere boxes.
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Conduct daily workplace communication entirely in Japanese while reference-reading technical manuals in English."
+                    data-jp="社内での業務連絡はすべて日本語で実施、精密な技術マニュアルの確認には英語を使用。">
+                Conduct daily workplace communication entirely in Japanese while reference-reading technical manuals in English.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="mb-12 relative">
+        <div class="absolute left-[-26px] top-1" style="width:14px;height:14px;background:#38BDF8;border-radius:50%;box-shadow:0 0 12px rgba(56,189,248,0.8),0 0 24px rgba(56,189,248,0.4);flex-shrink:0;margin-top:4px;"></div>
+        <div class="glass rounded-xl p-6 sm:p-7 hover:border-sky-500/25 transition-all duration-300">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+            <div>
+              <h3 class="font-display font-600 text-slate-100 text-base"
+                  data-en="Remote Data Annotation Specialist" data-jp="AIデータアノテーションスペシャリスト">Remote Data Annotation Specialist</h3>
+              <div class="text-sky-300 text-sm mt-1"
+                   data-en="Remote Freelance Contracts" data-jp="リモートワーク">Remote Freelance Contracts</div>
+            </div>
+            <span class="tag-chip rounded-full px-3 py-1 text-xs whitespace-nowrap self-start sm:self-auto"
+                  data-en="2020 – 2024" data-jp="2020年 ～ 2024年">2020 – 2024</span>
+          </div>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Executed precise image labeling and bounding-box annotation on electronics components (ICs, PCBs, bolts, sheets) to train computer vision models."
+                    data-jp="電子機器の画像データにおいて、ICチップ、基板、ボルト、シート等の精密なアノテーション（バウンディングボックス設定）。">
+                Executed precise image labeling and bounding-box annotation on electronics components (ICs, PCBs, bolts, sheets) to train computer vision models.
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Annotated high-resolution satellite imagery for environmental and structural mapping (identifying forests, housing, infrastructure)."
+                    data-jp="高解像度衛星画像を用いた、住宅、道路、森林等のインフラ・環境特徴量のラベリング作業。">
+                Annotated high-resolution satellite imagery for environmental and structural mapping (identifying forests, housing, infrastructure).
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Conducted targeted internet research for profile matching and data curation projects."
+                    data-jp="プロファイルマッチングとデータキュレーションプロジェクトのためのインターネットリサーチ。">
+                Conducted targeted internet research for profile matching and data curation projects.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="relative">
+        <div class="absolute left-[-26px] top-1" style="width:14px;height:14px;background:#6366F1;border-radius:50%;box-shadow:0 0 8px rgba(99,102,241,0.6);opacity:0.7;"></div>
+        <div class="glass rounded-xl p-6 sm:p-7 hover:border-indigo-500/25 transition-all duration-300">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+            <div>
+              <h3 class="font-display font-600 text-slate-100 text-base"
+                  data-en="Academic Home Tutor" data-jp="家庭教師">Academic Home Tutor</h3>
+              <div class="text-slate-400 text-sm mt-1"
+                   data-en="Freelance · Nepal" data-jp="フリーランス（ネパール）">Freelance · Nepal</div>
+            </div>
+            <span class="tag-chip rounded-full px-3 py-1 text-xs whitespace-nowrap self-start sm:self-auto"
+                  data-en="2023 – 2024" data-jp="2023年 ～ 2024年">2023 – 2024</span>
+          </div>
+          <ul class="space-y-2.5">
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-500 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Taught Mathematics, Science, Social Studies, and Nepali to school-level students."
+                    data-jp="学生を対象に数学、理科、社会、ネパール語の個別指導を担当。">
+                Taught Mathematics, Science, Social Studies, and Nepali to school-level students.
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-500 flex-shrink-0"></span>
+              <span class="text-slate-400 text-sm leading-relaxed"
+                    data-en="Translated complex concepts into easily digestible lessons, strengthening communication and leadership skills."
+                    data-jp="複雑な概念をわかりやすい授業内容に変換し、コミュニケーション能力とリーダーシップを強化。">
+                Translated complex concepts into easily digestible lessons, strengthening communication and leadership skills.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PROJECTS ======================== -->
+<section id="projects" class="py-24 px-4 sm:px-6">
+  <div class="max-w-6xl mx-auto reveal">
+
+    <div class="flex items-center gap-4 mb-12">
+      <div class="text-xs font-mono text-sky-400 tracking-widest uppercase">04</div>
+      <div class="h-px flex-1 bg-gradient-to-r from-sky-500/50 to-transparent"></div>
+      <h2 class="font-display text-2xl sm:text-3xl font-600 text-slate-100"
+          data-en="Engineering Projects" data-jp="エンジニアリングプロジェクト">Engineering Projects</h2>
+      <div class="h-px flex-1 bg-gradient-to-l from-sky-500/50 to-transparent"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Project 1 -->
+      <div class="project-card rounded-xl p-6 backdrop-blur-sm flex flex-col">
+        <div class="w-10 h-10 rounded-lg mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(56,189,248,0.1)); border:1px solid rgba(99,102,241,0.2)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="1.8">
+            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <div class="mb-1 text-xs font-mono text-indigo-400 uppercase tracking-widest"
+             data-en="Major Project" data-jp="卒業研究">Major Project</div>
+        <h3 class="font-display font-600 text-slate-100 text-base mb-2"
+            data-en="Text-to-Speech Assistive OCR System"
+            data-jp="文字音声変換アシストOCRシステム">Text-to-Speech Assistive OCR System</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5 flex-1"
+           data-en="Built an assistive device that extracts printed characters and synthesizes them into audible speech."
+           data-jp="カメラで撮影した印刷文字をテキストとして抽出し、音声合成エンジンを介してクリアな音声に変換出力するシステム。">
+          Built an assistive device that extracts printed characters and synthesizes them into audible speech.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="tag-chip rounded px-2 py-1 text-xs">Raspberry Pi</span>
+          <span class="tag-chip rounded px-2 py-1 text-xs">Python</span>
+          <span class="tag-chip rounded px-2 py-1 text-xs">Tesseract OCR</span>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card rounded-xl p-6 backdrop-blur-sm flex flex-col">
+        <div class="w-10 h-10 rounded-lg mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(99,102,241,0.1)); border:1px solid rgba(56,189,248,0.2)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div class="mb-1 text-xs font-mono text-sky-400 uppercase tracking-widest"
+             data-en="Minor Project" data-jp="ミニプロジェクト">Minor Project</div>
+        <h3 class="font-display font-600 text-slate-100 text-base mb-2"
+            data-en="IoT Vital Health Monitoring System"
+            data-jp="IoTバイタル健康モニタリングシステム">IoT Vital Health Monitoring System</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5 flex-1"
+           data-en="Interfaced physical sensors to read vital signs and engineered filtering protocols for wireless data tracking."
+           data-jp="生体データを取得し、アナログ信号のノイズフィルタリング処理を施してデータ同期を検証した医療テレメトリ。">
+          Interfaced physical sensors to read vital signs and engineered filtering protocols for wireless data tracking.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="tag-chip rounded px-2 py-1 text-xs">Arduino</span>
+          <span class="tag-chip rounded px-2 py-1 text-xs">LM35</span>
+          <span class="tag-chip rounded px-2 py-1 text-xs">IR Pulse Sensor</span>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card rounded-xl p-6 backdrop-blur-sm flex flex-col">
+        <div class="w-10 h-10 rounded-lg mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(56,189,248,0.05)); border:1px solid rgba(99,102,241,0.2)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A5B4FC" stroke-width="1.8">
+            <circle cx="12" cy="12" r="3"/><path d="M3 12a9 9 0 0 0 9 9m0-18a9 9 0 0 1 9 9M3 12h2m14 0h2M12 3v2m0 14v2"/>
+          </svg>
+        </div>
+        <div class="mb-1 text-xs font-mono text-indigo-400 uppercase tracking-widest"
+             data-en="Robotics" data-jp="ロボティクス">Robotics</div>
+        <h3 class="font-display font-600 text-slate-100 text-base mb-2"
+            data-en="Autonomous Mobile Robotics Prototyping"
+            data-jp="自律走行型ロボティクス開発">Autonomous Mobile Robotics Prototyping</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5 flex-1"
+           data-en="Programmed independent Line-Following and Obstacle-Avoiding robots using infrared and ultrasonic data arrays."
+           data-jp="赤外線・超音波センサの入力をモータードライバーへフィードバックさせ、リアルタイムな方向補正を行う線追従・障害物回避ロボット。">
+          Programmed independent Line-Following and Obstacle-Avoiding robots using infrared and ultrasonic data arrays.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-auto">
+          <span class="tag-chip rounded px-2 py-1 text-xs">Arduino</span>
+          <span class="tag-chip rounded px-2 py-1 text-xs">C / C++</span>
+          <span class="tag-chip rounded px-2 py-1 text-xs">Ultrasonic</span>
+          <span class="tag-chip rounded px-2 py-1 text-xs">IR Sensors</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================== EDUCATION ======================== -->
+<section id="education" class="py-24 px-4 sm:px-6">
+  <div class="max-w-4xl mx-auto reveal">
+
+    <div class="flex items-center gap-4 mb-12">
+      <div class="text-xs font-mono text-indigo-400 tracking-widest uppercase">05</div>
+      <div class="h-px flex-1 bg-gradient-to-r from-indigo-500/50 to-transparent"></div>
+      <h2 class="font-display text-2xl sm:text-3xl font-600 text-slate-100"
+          data-en="Education & Certifications" data-jp="学歴・資格">Education & Certifications</h2>
+      <div class="h-px flex-1 bg-gradient-to-l from-indigo-500/50 to-transparent"></div>
+    </div>
+
+    <div class="space-y-5">
+
+      <!-- Degree -->
+      <div class="glass rounded-xl p-6 sm:p-7 flex flex-col sm:flex-row sm:items-start gap-5 hover:border-indigo-500/25 transition-all duration-300">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(56,189,248,0.1)); border:1px solid rgba(99,102,241,0.25)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="1.8">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+            <div>
+              <h3 class="font-display font-600 text-slate-100"
+                  data-en="Bachelor of Electronics & Communication Engineering"
+                  data-jp="電子通信工学部 学士号">Bachelor of Electronics & Communication Engineering</h3>
+              <div class="text-indigo-300 text-sm mt-1"
+                   data-en="Tribhuvan University (IOE), Nepal"
+                   data-jp="トリブバン大学 工学部（ネパール）">Tribhuvan University (IOE), Nepal</div>
+            </div>
+            <span class="tag-chip rounded-full px-3 py-1 text-xs whitespace-nowrap self-start"
+                  data-en="Graduated 2023" data-jp="2023年 卒業">Graduated 2023</span>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-3">
+            <span class="inline-flex items-center gap-1.5 text-xs text-emerald-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span data-en="First Division (65%)" data-jp="第1級相当（65%）">First Division (65%)</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5 text-xs text-slate-400">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+              <span data-en="Electronics · Networking · Embedded Systems" data-jp="電子工学 · ネットワーク · 組み込みシステム">Electronics · Networking · Embedded Systems</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CCNA -->
+      <div class="glass rounded-xl p-6 sm:p-7 flex flex-col sm:flex-row sm:items-start gap-5 hover:border-sky-500/25 transition-all duration-300">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(56,189,248,0.15), rgba(99,102,241,0.1)); border:1px solid rgba(56,189,248,0.2)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8">
+            <rect x="9" y="2" width="6" height="4" rx="1"/><rect x="2" y="9" width="6" height="4" rx="1"/><rect x="16" y="9" width="6" height="4" rx="1"/>
+            <path d="M12 6v3M5 11h4M15 11h4"/>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h3 class="font-display font-600 text-slate-100"
+              data-en="CCNA Training — Routing, Switching & Subnetting"
+              data-jp="CCNA研修 — ルーティング・スイッチング・サブネッティング">CCNA Training — Routing, Switching & Subnetting</h3>
+          <div class="text-sky-300 text-sm mt-1"
+               data-en="Professional Networking Training" data-jp="プロフェッショナルネットワーク研修">Professional Networking Training</div>
+          <div class="mt-2 text-xs text-slate-500"
+               data-en="Cisco networking fundamentals, IP addressing, VLANs, and WAN protocols."
+               data-jp="Ciscoネットワーク基礎、IPアドレッシング、VLAN、WANプロトコル。">
+            Cisco networking fundamentals, IP addressing, VLANs, and WAN protocols.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contact" class="py-24 px-4 sm:px-6">
+  <div class="max-w-4xl mx-auto reveal">
+
+    <div class="flex items-center gap-4 mb-12">
+      <div class="text-xs font-mono text-sky-400 tracking-widest uppercase">06</div>
+      <div class="h-px flex-1 bg-gradient-to-r from-sky-500/50 to-transparent"></div>
+      <h2 class="font-display text-2xl sm:text-3xl font-600 text-slate-100"
+          data-en="Get in Touch" data-jp="お問い合わせ">Get in Touch</h2>
+      <div class="h-px flex-1 bg-gradient-to-l from-sky-500/50 to-transparent"></div>
+    </div>
+
+    <div class="glass rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-40 h-40 opacity-10" style="background: radial-gradient(circle at top left, #6366F1, transparent 70%)"></div>
+      <div class="absolute bottom-0 right-0 w-40 h-40 opacity-10" style="background: radial-gradient(circle at bottom right, #38BDF8, transparent 70%)"></div>
+
+      <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed max-w-xl mx-auto"
+         data-en="Open to hardware engineering roles, embedded systems positions, and AI data projects in Japan or remote."
+         data-jp="日本国内または海外リモートでのハードウェアエンジニア、組み込みシステム、AIデータプロジェクトの機会を探しています。">
+        Open to hardware engineering roles, embedded systems positions, and AI data projects in Japan or remote.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+
+        <!-- Email -->
+        <a href="mailto:your.email@example.com"
+           class="flex items-center gap-3 glass rounded-xl px-6 py-4 hover:border-indigo-500/40 hover:bg-indigo-500/5 transition-all duration-300 w-full sm:w-auto">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="1.8">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span class="text-slate-300 text-sm font-medium">your.email@example.com</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/yourprofile" target="_blank"
+           class="flex items-center gap-3 glass rounded-xl px-6 py-4 hover:border-sky-500/40 hover:bg-sky-500/5 transition-all duration-300 w-full sm:w-auto">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+          </svg>
+          <span class="text-slate-300 text-sm font-medium">linkedin.com/in/yourprofile</span>
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/yourusername" target="_blank"
+           class="flex items-center gap-3 glass rounded-xl px-6 py-4 hover:border-indigo-500/40 hover:bg-indigo-500/5 transition-all duration-300 w-full sm:w-auto">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A5B4FC" stroke-width="1.8">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          <span class="text-slate-300 text-sm font-medium">github.com/yourusername</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer class="border-t border-slate-800/60 py-8 px-4">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded flex items-center justify-center" style="background: linear-gradient(135deg,#6366F1,#38BDF8)">
+        <svg width="12" height="12" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="9" r="3" fill="white"/>
+          <path d="M9 1v4M9 13v4M1 9h4M13 9h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="text-slate-500 text-xs font-mono"
+            data-en="Electronics & Communication Engineer · Japan"
+            data-jp="電子通信エンジニア · 日本">Electronics & Communication Engineer · Japan</span>
+    </div>
+    <div class="text-slate-600 text-xs font-mono"
+         data-en="Built with ♥ — Deploy via GitHub Pages"
+         data-jp="GitHub Pagesにて公開">Built with ♥ — Deploy via GitHub Pages</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
